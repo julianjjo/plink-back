@@ -11,6 +11,9 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+const db = require("./src/models/index.js");
+console.log(db);
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
