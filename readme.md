@@ -1,6 +1,6 @@
 # Proyecto de prueba back
 
-Esta realizado en express.js cuenta con los modulos de nodejs sequelize y jsonwebtoken.
+Esta realizado con el framework express.js cuenta con los modulos de nodejs sequelize y jsonwebtoken.
 
 
 ## Instalación

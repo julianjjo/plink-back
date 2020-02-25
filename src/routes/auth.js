@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 /* POST login validate. */
-router.post('/', function(req, res, next) {
+router.post('/signin', function(req, res, next) {
   res.send('respond with a resource');
 });
 

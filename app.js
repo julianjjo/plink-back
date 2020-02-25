@@ -24,6 +24,6 @@ if (env == 'development') {
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/login', usersRouter);
+app.use('/auth', usersRouter);
 
 module.exports = app;
