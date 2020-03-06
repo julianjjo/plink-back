@@ -1,4 +1,3 @@
-'use stric';
 module.exports = (sequelize, DataTypes) => {
   var User = sequelize.define('User', {
     name: DataTypes.STRING,
@@ -10,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     password: {
       type: DataTypes.STRING,
       validate: {
-        max:{
+        max: {
           args: 8,
           msg: "Maximum 9 characteres allowed in password",
         }
@@ -19,8 +18,8 @@ module.exports = (sequelize, DataTypes) => {
     preferred_currency: DataTypes.ENUM('usd', 'eur', 'cop')
   });
 
-  User.associate = function(models) {
-   User.hasMany(models.Crytocurrency);
+  User.associate = function (models) {
+    User.hasMany(models.Crytocurrency)
   };
 
   return User;

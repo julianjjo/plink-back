@@ -1,4 +1,3 @@
-'use stric';
 module.exports = (sequelize, DataTypes) => {
   var Crytocurrency = sequelize.define('Crytocurrency', {
     price: DataTypes.INTEGER,

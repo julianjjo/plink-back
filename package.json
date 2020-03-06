@@ -2,9 +2,20 @@
   "name": "plink-back",
   "version": "0.0.0",
   "private": true,
+  "nodemonConfig": { 
+    "exec": "npm run dev",
+    "watch": ["server/*", "public/*"],
+    "ignore": ["**/__tests__/**", "*.test.js", "*.spec.js", "*.Spec.js"]
+  },
   "scripts": {
-    "start": "node ./bin/www",
-    "test": "npx jasmine \"src/spec/**/*Spec.js\""
+    "build": "npm-run-all clean transpile",
+    "server": "node ./dist-server/bin/www.js",
+    "dev": "npx npm-run-all build server",
+    "prod": "SET NODE_ENV=production & npx npm-run-all build server",
+    "transpile": "npx babel ./server --out-dir dist-server --copy-files",
+    "clean": "npx rimraf dist-server",
+    "watch:dev": "npx nodemon",
+    "test": "npx jasmine \"dist-server/src/spec/**/*Spec.js\""
   },
   "dependencies": {
     "bcrypt": "^4.0.0",
@@ -20,5 +31,8 @@
   "devDependencies": {
     "jasmine": "^3.5.0",
     "sequelize-cli": "^5.5.1"
+  },
+  "babel": {
+    "presets": ["@babel/preset-env"]
   }
 }

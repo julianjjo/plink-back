@@ -1,9 +1,9 @@
-var express = require('express');
-var path = require('path');
-var logger = require('morgan');
-
-var indexRouter = require('./src/routes/index');
-var usersRouter = require('./src/routes/users');
+import express from 'express';
+import logger from 'morgan';
+import db from './src/models/index'
+import indexRouter from './src/routes/index';
+import usersRouter from './src/routes/users';
+import authRouter from './src/routes/auth';
 
 var app = express();
 
@@ -11,7 +11,6 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-const db = require("./src/models/index");
 const env = process.env.NODE_ENV  || 'development';
 if (env == 'development') {
   db.sequelize.sync({ force: true }).then(() => {
@@ -24,6 +23,6 @@ if (env == 'development') {
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/auth', usersRouter);
+app.use('/auth', authRouter);
 
-module.exports = app;
+export default app;
