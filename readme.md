@@ -1,4 +1,4 @@
-# Proyecto de prueba back
+# Proyecto de prueba back [![Build Status](https://travis-ci.org/julianjjo/plink-back.svg?branch=master)](https://travis-ci.org/julianjjo/plink-back)
 
 Esta realizado con el framework express.js cuenta con los modulos de nodejs sequelize y jsonwebtoken.
 
