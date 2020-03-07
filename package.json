@@ -23,11 +23,11 @@
     "transpile": "npx babel ./server --out-dir dist-server --copy-files",
     "clean": "npx rimraf dist-server",
     "watch:dev": "npx nodemon",
-    "test": "npx jasmine \"dist-server/src/spec/**/*Spec.js\""
+    "test": "npx nyc --reporter=lcov --reporter=text node_modules/jasmine/bin/jasmine.js",
+    "coverage": "npm run test && cat ./coverage/lcov.info | coveralls"
   },
   "dependencies": {
     "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.8.7",
     "@babel/preset-env": "^7.8.7",
     "bcrypt": "^4.0.0",
     "body-parser": "^1.19.0",
@@ -42,7 +42,15 @@
     "sequelize": ">=4.44.3"
   },
   "devDependencies": {
+    "@babel/core": "^7.8.7",
+    "@babel/node": "^7.8.7",
+    "@babel/register": "^7.8.6",
+    "babel-plugin-istanbul": "^6.0.0",
+    "coveralls": "^3.0.9",
+    "isparta": "^4.1.1",
+    "istanbul": "^0.4.5",
     "jasmine": "^3.5.0",
+    "jasmine-core": "^3.5.0",
     "nodemon": "^1.19.4",
     "sequelize-cli": "^5.5.1"
   },
