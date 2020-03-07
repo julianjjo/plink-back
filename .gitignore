@@ -6,3 +6,7 @@ config/config.json
 
 #compilated server
 dist-server
+
+#coverage
+coverage
+.nyc_output
