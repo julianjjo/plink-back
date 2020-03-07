@@ -23,8 +23,7 @@
     "transpile": "npx babel ./server --out-dir dist-server --copy-files",
     "clean": "npx rimraf dist-server",
     "watch:dev": "npx nodemon",
-    "test": "npx nyc --reporter=lcov --reporter=text node_modules/jasmine/bin/jasmine.js",
-    "coverage": "npm run test && cat ./coverage/lcov.info | coveralls"
+    "test": "npx nyc --reporter=lcov --reporter=text node_modules/jasmine/bin/jasmine.js"
   },
   "dependencies": {
     "@babel/cli": "^7.8.4",
@@ -49,6 +48,7 @@
     "coveralls": "^3.0.9",
     "isparta": "^4.1.1",
     "istanbul": "^0.4.5",
+    "istanbul-coveralls": "^1.0.3",
     "jasmine": "^3.5.0",
     "jasmine-core": "^3.5.0",
     "nodemon": "^1.19.4",
