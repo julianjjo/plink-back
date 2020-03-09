@@ -26,11 +26,10 @@
     "test": "npx nyc --reporter=lcov --reporter=text node_modules/jasmine/bin/jasmine.js"
   },
   "dependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/preset-env": "^7.8.7",
     "bcrypt": "^4.0.0",
     "body-parser": "^1.19.0",
     "cookie-parser": "~1.4.4",
+    "core-js": "^3.6.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "jsonwebtoken": "^8.5.1",
@@ -41,8 +40,9 @@
     "sequelize": ">=4.44.3"
   },
   "devDependencies": {
+    "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.7",
-    "@babel/node": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
     "@babel/register": "^7.8.6",
     "babel-plugin-istanbul": "^6.0.0",
     "coveralls": "^3.0.9",
