@@ -16,14 +16,15 @@
     ]
   },
   "scripts": {
-    "build": "npm-run-all clean transpile",
+    "build": "npx npm-run-all clean transpile",
     "server": "node ./dist-server/bin/www.js",
     "dev": "npx npm-run-all build server",
     "prod": "SET NODE_ENV=production & npx npm-run-all build server",
     "transpile": "npx babel ./server --out-dir dist-server --copy-files",
     "clean": "npx rimraf dist-server",
     "watch:dev": "npx nodemon",
-    "test": "npx nyc --reporter=lcov --reporter=text node_modules/jasmine/bin/jasmine.js"
+    "test": "jest",
+    "coveralls": "jest --coverage && cat coverage/lcov.info | coveralls"
   },
   "dependencies": {
     "bcrypt": "^4.0.0",
@@ -44,6 +45,7 @@
     "@babel/core": "^7.8.7",
     "@babel/preset-env": "^7.8.7",
     "@babel/register": "^7.8.6",
+    "babel-jest": "^25.1.0",
     "babel-plugin-istanbul": "^6.0.0",
     "coveralls": "^3.0.9",
     "isparta": "^4.1.1",
@@ -51,12 +53,20 @@
     "istanbul-coveralls": "^1.0.3",
     "jasmine": "^3.5.0",
     "jasmine-core": "^3.5.0",
+    "jest": "^25.1.0",
     "nodemon": "^1.19.4",
     "sequelize-cli": "^5.5.1"
   },
   "babel": {
     "presets": [
-      "@babel/preset-env"
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
     ]
   }
 }

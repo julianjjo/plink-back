@@ -1,14 +1,13 @@
 import express from 'express';
-import {sign} from '../utils/auth';
+import Auth from '../utils/auth';
 let router = express.Router();
+let auth = new Auth();
 
 /* POST login validate. */
 router.post('/login', function(req, res, next) {
   let user = req.body.user;
   let password = req.body.password;
-  console.log(user);
-  console.log(password);
-  let token = sign({ user: 'julian', password: 'ndjnejnejnje' });
+  let token = auth.sign({ user: user, password: password });
 
   res.json({
     message: 'Authenticated',

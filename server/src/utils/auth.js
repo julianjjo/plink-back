@@ -1,16 +1,29 @@
 import jwt from 'jsonwebtoken';
 import secretKey from '../../key';
 
-export function verify(token){
-  try {
-    jwt.verify(token, secretKey.tokenKey);
-  } catch(err) {
-    return false;
+class Auth {
+  constructor() {
   }
-  return true;
+
+  verify(token){
+    try {
+      jwt.verify(token, secretKey.tokenKey);
+    } catch(err) {
+      return false;
+    }
+    return true;
+  }
+
+  sign (data){
+    let token = jwt.sign(data, secretKey.tokenKey);
+    return token;
+  }
+
+  getToken(request){
+    let token = request.headers.authorization;
+    token = token.substr(6);
+    return token;
+  }
 }
 
-export function sign (data){
-  var token = jwt.sign(data, secretKey.tokenKey);
-  return token;
-}
+export default Auth;

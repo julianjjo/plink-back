@@ -13,4 +13,4 @@ before_script:
   - npx babel ./server --out-dir dist-server --copy-files
 
 after_script:
-  - npm run test && npx npx istanbul-coveralls
+  - npm run coveralls

@@ -3,6 +3,7 @@ import logger from 'morgan';
 import db from './src/models/index'
 import indexRouter from './src/routes/index';
 import usersRouter from './src/routes/users';
+import crytocurrenciesRouter from './src/routes/crytocurrencies';
 import authRouter from './src/routes/auth';
 
 var app = express();
@@ -23,6 +24,7 @@ if (env == 'development') {
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/crytocurrencies', crytocurrenciesRouter);
 app.use('/auth', authRouter);
 
 export default app;
