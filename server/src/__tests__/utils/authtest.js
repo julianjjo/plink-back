@@ -19,3 +19,24 @@ describe("Authentication verify token", function() {
         expect(this.auth.verify(token)).toBeTruthy();
     });
 })
+
+describe("Authentication get token", function() {
+    let auth;
+
+
+    beforeEach(() => {
+         this.auth =  new Auth();
+    });
+
+    test('is 3df5dc', () => {
+        const mockRequest = () => {
+            const req = {};
+            req.headers = {};
+            req.headers.authorization = "token 3df5dc";
+            return req;
+        };
+        let req = mockRequest();
+        expect(this.auth.getToken(req)).toBe("3df5dc");
+    });
+})
+
