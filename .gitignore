@@ -10,3 +10,6 @@ dist-server
 #coverage
 coverage
 .nyc_output
+
+#editor
+.idea
