@@ -1,6 +1,5 @@
 
-# Proyecto de prueba back [![Build Status](https://travis-ci.org/julianjjo/plink-back.svg?branch=master)](https://travis-ci.org/julianjjo/plink-back)[![Coverage Status](https://coveralls.io/repos/github/julianjjo/plink-back/badge.svg?branch=master)](https://coveralls.io/github/julianjjo/plink-back?branch=master)
-
+# Proyecto de prueba back [![Build Status](https://travis-ci.org/julianjjo/plink-back.svg?branch=master)](https://travis-ci.org/julianjjo/plink-back)
   
 
 Esta realizado con el framework express.js cuenta con los modulos de nodejs sequelize y jsonwebtoken.
