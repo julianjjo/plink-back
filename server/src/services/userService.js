@@ -1,16 +1,15 @@
-import db from '../models/index';
 import "core-js/stable";
 import "regenerator-runtime/runtime";
 
 class userService{
 
-    constructor(){
+    constructor(db){
         this.user = db.sequelize.models.User;
     }
 
-    getAllUsers() {
+    async getAll() {
         let users;
-        users = this.user.findAll()
+        users = await this.user.findAll()
             .then(function (users) {
                 return JSON.parse(JSON.stringify(users));
             }).catch(function(err) {
@@ -18,18 +17,17 @@ class userService{
             });
         return users;
     }
-    async setUser(data) {
-        try {
-            await this.user.create(data);
-        } catch (error) {
-            console.log("");
-            throw error;
-        }
+
+    async set(data) {
+        await this.user.create(data)
+            .then().catch(function(err) {
+                throw err;
+            });
     }
 
-    getUser(userId) {
+    async get(userId) {
         let user;
-        user = this.user.findOne({
+        user = await this.user.findOne({
             where: {
                 id: userId
             }
@@ -44,8 +42,8 @@ class userService{
         return user;
     }
 
-    deleteUser(userId){
-        this.user.destroy({
+    async delete(userId){
+        await this.user.destroy({
             where: {
                 id: userId
             }
@@ -54,8 +52,8 @@ class userService{
         });
     }
 
-    updateUser(userId, data) {
-        this.user.update(data,
+    async update(userId, data) {
+        await this.user.update(data,
             {
                 where: {
                     id: userId

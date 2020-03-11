@@ -1,19 +1,20 @@
 import express from 'express';
 import Auth from '../utils/auth';
 import userService from '../services/userService';
-import ResponseUtils from '../utils/responseUtils';
+import Response from '../utils/response';
 import "core-js/stable";
 import "regenerator-runtime/runtime";
+import db from '../models/index';
 let router = express.Router();
 let auth = new Auth();
-let user = new userService();
+let user = new userService(db);
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   let token = auth.getToken(req);
-  let responseUtils = new ResponseUtils(res);
+  let responseUtils = new Response(res);
   if(auth.verify(token)){
-    const users = user.getAllUsers();
+    const users = user.getAll();
     users.then(function (jsonUsers) {
       responseUtils.responseJson(jsonUsers);
       return next();
@@ -26,9 +27,9 @@ router.get('/', function(req, res, next) {
 /* POST user saving. */
 router.post('/', async function(req, res, next) {
   let userData = req.body;
-  let responseUtils = new ResponseUtils(res);
+  let responseUtils = new Response(res);
   try {
-    await user.setUser(userData);
+    await user.set(userData);
   } catch (error) {
     responseUtils.responseErrorSequelizeSave(error);
     return next();
@@ -40,9 +41,9 @@ router.post('/', async function(req, res, next) {
 router.get('/:id', function(req, res, next) {
   let token = auth.getToken(req);
   let userId = req.params.id;
-  let responseUtils = new ResponseUtils(res);
+  let responseUtils = new Response(res);
   if(auth.verify(token)){
-    const userResult = user.getUser(userId);
+    const userResult = user.get(userId);
     userResult.then(function (jsonUser) {
       responseUtils.responseJson(jsonUser);
       return next();
@@ -56,26 +57,30 @@ router.put('/:id', function (req, res, next) {
   let data = req.body;
   let token = auth.getToken(req);
   let userId = req.params.id;
-  let responseUtils = new ResponseUtils(res);
+  let responseUtils = new Response(res);
   if(auth.verify(token)) {
-    user.updateUser(userId, data);
+    user.update(userId, data);
     responseUtils.responseOkMessage("User Updated");
+    return next();
   } else{
     responseUtils.responseErrorTokenInvalid(res);
   }
-})
+  return next();
+});
 
 router.delete('/:id', function (req, res, next) {
   let token = auth.getToken(req);
   let userId = req.params.id;
   let user = new userService();
-  let responseUtils = new ResponseUtils(res);
+  let responseUtils = new Response(res);
   if(auth.verify(token)) {
-    user.deleteUser(userId);
+    user.delete(userId);
     responseUtils.responseOkMessage("User Deleted");
+    return next();
   }else {
     responseUtils.responseErrorTokenInvalid(res);
   }
-})
+  return next();
+});
 
 export default router;

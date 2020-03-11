@@ -1,61 +1,59 @@
-import db from '../models/index';
 import "core-js/stable";
 import "regenerator-runtime/runtime";
 
 class cryptocurrencyService{
 
-    constructor(){
-        this.crytocurrency = db.sequelize.models.Crytocurrency;
+    constructor(db){
+        this.cryptocurrency = db.sequelize.models.Cryptocurrency;
     }
 
-    getAllCryptocurrencies() {
-        let crytocurrencies;
-        crytocurrencies = this.crytocurrency.findAll()
+    async getAll() {
+        let cryptocurrencies;
+        cryptocurrencies = await this.cryptocurrency.findAll()
             .then(function (crytocurrencies) {
                 return JSON.parse(JSON.stringify(crytocurrencies));
-            }).catch(function(err) {
+            }).catch(function (err) {
                 throw err;
             });
-        return crytocurrencies;
-    }
-    async setCrytocurrency(data) {
-        try {
-            await this.crytocurrency.create(data);
-        } catch (error) {
-            console.log("");
-            throw error;
-        }
+        return cryptocurrencies;
     }
 
-    getCrytocurrency(crytocurrencyId) {
-        let crytocurrency;
-        crytocurrency = this.crytocurrency.findOne({
+    async set(data) {
+        await this.cryptocurrency.create(data)
+            .then().catch(function(err) {
+                throw err;
+            });
+    }
+
+    async get(crytocurrencyId) {
+        let cryptocurrencyResult;
+        cryptocurrencyResult = await this.cryptocurrency.findOne({
             where: {
                 id: crytocurrencyId
             }
-        }).then(function(crytocurrency) {
+        }).then(function (crytocurrency) {
             if (!crytocurrency) {
-                return 'User not found';
+                return 'CryptoCurrency not found';
             }
             return JSON.parse(JSON.stringify(crytocurrency));
-        }).catch(function(err) {
+        }).catch(function (err) {
             throw err;
         });
-        return crytocurrency;
+        return cryptocurrencyResult;
     }
 
-    deleteCrytocurrency(crytocurrencyId){
-        this.crytocurrency.destroy({
+    async delete(cryptocurrencyId){
+        await this.cryptocurrency.destroy({
             where: {
-                id: crytocurrencyId
+                id: cryptocurrencyId
             }
         }).then().catch(function(err) {
             throw err;
         });
     }
 
-    updateCrytocurrency(crytocurrencyId, data) {
-        this.crytocurrency.update(data,
+    async update(crytocurrencyId, data) {
+        await this.cryptocurrency.update(data,
             {
                 where: {
                     id: crytocurrencyId

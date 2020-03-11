@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   User.associate = function (models) {
-    User.hasMany(models.Crytocurrency)
+    User.hasMany(models.Cryptocurrency)
   };
 
   return User;

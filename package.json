@@ -59,7 +59,8 @@
     "nodemon": "^1.19.4",
     "sequelize-cli": "^5.5.1",
     "sequelize-test-helpers": "^1.2.2",
-    "sinon": "^9.0.1"
+    "sinon": "^9.0.1",
+    "supertest": "^4.0.2"
   },
   "babel": {
     "presets": [

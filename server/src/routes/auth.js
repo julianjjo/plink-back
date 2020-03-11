@@ -13,7 +13,7 @@ router.post('/login', function(req, res, next) {
     message: 'Authenticated',
     token: token
   });
-  next();
+  return next();
 });
 
 export default router;

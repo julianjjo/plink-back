@@ -1,4 +1,4 @@
-class ResponseUtils {
+class Response {
 
     constructor(response) {
         this.response = response;
@@ -49,4 +49,4 @@ class ResponseUtils {
     }
 }
 
-export default ResponseUtils
+export default Response

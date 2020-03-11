@@ -1,8 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
-  var Crytocurrency = sequelize.define('Crytocurrency', {
+  return sequelize.define('Cryptocurrency', {
     price: DataTypes.INTEGER,
     name: DataTypes.STRING,
     source: DataTypes.STRING
   });
-  return Crytocurrency;
 };
