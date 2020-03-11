@@ -4,6 +4,7 @@ import "regenerator-runtime/runtime";
 class cryptocurrencyService{
 
     constructor(db){
+        this.db = db;
         this.cryptocurrency = db.sequelize.models.Cryptocurrency;
     }
 
@@ -62,6 +63,26 @@ class cryptocurrencyService{
         ).then().catch(function(err) {
             throw err;
         });
+    }
+
+    async getTop(userId) {
+        let cryptocurrencies;
+        cryptocurrencies = await this.cryptocurrency.findAll({
+            order: [
+                ['price', 'DESC']
+            ],
+            limit: 3,
+            include: {
+                model: this.db.sequelize.models.User,
+                as: 'User',
+                where: {id: userId}
+            }
+        })  .then(function (crytocurrencies) {
+                return JSON.parse(JSON.stringify(crytocurrencies));
+            }).catch(function (err) {
+                throw err;
+            });
+        return cryptocurrencies;
     }
 }
 

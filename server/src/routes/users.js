@@ -24,13 +24,14 @@ router.get('/', function(req, res, next) {
   }
 });
 
-/* POST user saving. */
+/* POST user with currency saving. */
 router.post('/', async function(req, res, next) {
   let userData = req.body;
   let responseUtils = new Response(res);
   try {
     await user.set(userData);
   } catch (error) {
+    console.log(error);
     responseUtils.responseErrorSequelizeSave(error);
     return next();
   }

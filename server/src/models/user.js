@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  var User = sequelize.define('User', {
+  let User = sequelize.define('User', {
     name: DataTypes.STRING,
     lastname: DataTypes.STRING,
     username: {
@@ -19,7 +19,9 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   User.associate = function (models) {
-    User.hasMany(models.Cryptocurrency)
+    User.hasMany(models.Cryptocurrency, {
+      as: 'Cryptocurrencies'
+    });
   };
 
   return User;

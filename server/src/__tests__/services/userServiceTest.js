@@ -33,6 +33,18 @@ describe("User Service", function() {
     });
 
     test('have Called create in set', () => {
+        this.data.cryptocurrencies = [
+            {
+                price: 7832,
+                name: "Bitcoin",
+                source: "testing"
+            },
+            {
+                price: 191,
+                name: "Ethereum",
+                source: "testing"
+            }
+        ];
         db.sequelize.models.User.create = jest.fn().mockName('create');
         let User = new UserService(db);
         User.set(this.data);

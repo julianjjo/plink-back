@@ -9,7 +9,7 @@ let router = express.Router();
 let auth = new Auth();
 let crytocurrency = new crytocurrencyService(db);
 
-/* GET crytocurrencies listing. */
+/* GET cryptocurrencies listing. */
 router.get('/', function(req, res, next) {
     let token = auth.getToken(req);
     let responseUtils = new Response(res);
@@ -24,7 +24,7 @@ router.get('/', function(req, res, next) {
     }
 });
 
-/* POST user saving. */
+/* POST cryptocurrency saving. */
 router.post('/', async function(req, res, next) {
     let crytocurrencyData = req.body;
     let responseUtils = new Response(res);
@@ -37,13 +37,29 @@ router.post('/', async function(req, res, next) {
     responseUtils.responseOkMessage("Crytocurrency Created");
 });
 
-/* GET user for id. */
+/* GET cryptocurrency for id. */
 router.get('/:id', function(req, res, next) {
     let token = auth.getToken(req);
     let crytocurrencyId = req.params.id;
     let responseUtils = new Response(res);
     if(auth.verify(token)){
         const crytocurrencyResult = crytocurrency.get(crytocurrencyId);
+        crytocurrencyResult.then(function (jsonCrytocurrency) {
+            responseUtils.responseJson(jsonCrytocurrency);
+            return next();
+        });
+    } else{
+        responseUtils.responseErrorTokenInvalid(res);
+    }
+});
+
+/* GET cryptocurrency for id. */
+router.get('/top/:userId', function(req, res, next) {
+    let token = auth.getToken(req);
+    let userId = req.params.userId;
+    let responseUtils = new Response(res);
+    if(auth.verify(token)){
+        const crytocurrencyResult = crytocurrency.getTop(userId);
         crytocurrencyResult.then(function (jsonCrytocurrency) {
             responseUtils.responseJson(jsonCrytocurrency);
             return next();

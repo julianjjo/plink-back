@@ -101,4 +101,22 @@ describe("Cryptocurrency Service", function() {
             expect(e).toEqual(new Error("Dont found table")),
         );
     });
+
+    test('should fetch cryptocurrencies getTop', () => {
+        this.data = [
+            this.data
+        ];
+        db.sequelize.models.Cryptocurrency.findAll.mockResolvedValue(this.data);
+        let Cryptocurrency = new CrytocurrencyService(db);
+        return Cryptocurrency.getTop().then(data => expect(data).toEqual(this.data));
+    });
+
+    test('should trow error in getTop', async () => {
+        let idCriptocurrency = 10;
+        db.sequelize.models.Cryptocurrency.findAll.mockRejectedValue(new Error("Dont found table"));
+        let Cryptocurrency = new CrytocurrencyService(db);
+        return await Cryptocurrency.getTop(idCriptocurrency).catch(e =>
+            expect(e).toEqual(new Error("Dont found table")),
+        );
+    });
 });

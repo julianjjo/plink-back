@@ -19,7 +19,10 @@ class userService{
     }
 
     async set(data) {
-        await this.user.create(data)
+        await this.user.create(data,
+            {
+                include: [ 'Cryptocurrencies' ]
+            })
             .then().catch(function(err) {
                 throw err;
             });
