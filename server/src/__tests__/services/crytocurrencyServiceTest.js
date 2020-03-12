@@ -11,6 +11,8 @@ describe("Cryptocurrency Service", function() {
             name: "Bitcoin",
             source: "testing"
         };
+        this.userDataMock = {};
+        this.userDataMock.id = 1;
     });
 
     test('should fetch cryptocurrencies', () => {
@@ -18,13 +20,13 @@ describe("Cryptocurrency Service", function() {
             this.data
         ];
         db.sequelize.models.Cryptocurrency.findAll.mockResolvedValue(this.data);
-        let Cryptocurrency = new CrytocurrencyService(db);
+        let Cryptocurrency = new CrytocurrencyService(db, this.userDataMock);
         return Cryptocurrency.getAll().then(data => expect(data).toEqual(this.data));
     });
 
     test('should trow error in getAll', async () => {
         db.sequelize.models.Cryptocurrency.findAll.mockRejectedValue(new Error("Dont Find Table Error"));
-        let Cryptocurrency = new CrytocurrencyService(db);
+        let Cryptocurrency = new CrytocurrencyService(db, this.userDataMock);
         return await Cryptocurrency.getAll().catch(e =>
             expect(e).toEqual(new Error("Dont Find Table Error")),
         );
@@ -107,15 +109,14 @@ describe("Cryptocurrency Service", function() {
             this.data
         ];
         db.sequelize.models.Cryptocurrency.findAll.mockResolvedValue(this.data);
-        let Cryptocurrency = new CrytocurrencyService(db);
+        let Cryptocurrency = new CrytocurrencyService(db, this.userDataMock);
         return Cryptocurrency.getTop().then(data => expect(data).toEqual(this.data));
     });
 
     test('should trow error in getTop', async () => {
-        let idCriptocurrency = 10;
         db.sequelize.models.Cryptocurrency.findAll.mockRejectedValue(new Error("Dont found table"));
-        let Cryptocurrency = new CrytocurrencyService(db);
-        return await Cryptocurrency.getTop(idCriptocurrency).catch(e =>
+        let Cryptocurrency = new CrytocurrencyService(db, this.userDataMock);
+        return await Cryptocurrency.getTop(3).catch(e =>
             expect(e).toEqual(new Error("Dont found table")),
         );
     });
