@@ -5,6 +5,7 @@ import Response from '../utils/response';
 import "core-js/stable";
 import "regenerator-runtime/runtime";
 import db from '../models/index';
+
 let router = express.Router();
 let auth = new Auth();
 let user = new userService(db);
@@ -31,7 +32,6 @@ router.post('/', async function(req, res, next) {
   try {
     await user.set(userData);
   } catch (error) {
-    console.log(error);
     responseUtils.responseErrorSequelizeSave(error);
     return next();
   }

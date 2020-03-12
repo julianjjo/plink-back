@@ -34,24 +34,41 @@ class userService{
             where: {
                 id: userId
             }
-        }).then(function(user) {
+        }).then(function (user) {
             if (!user) {
                 return 'User not found';
             }
             return JSON.parse(JSON.stringify(user));
-        }).catch(function(err) {
+        }).catch(function (err) {
             throw err;
         });
         return user;
     }
 
-    async delete(userId){
+    async getByUsername(username) {
+        let user;
+        user = await this.user.findOne({
+            where: {
+                username: username
+            }
+        }).then(function (user) {
+            if (!user) {
+                return false;
+            }
+            return JSON.parse(JSON.stringify(user));
+        }).catch(function (err) {
+            throw err;
+        });
+        return user;
+    }
+
+    async delete(userId) {
         await this.user.destroy({
             where: {
                 id: userId
             }
-        }).then().catch(function(err) {
-                throw err;
+        }).then().catch(function (err) {
+            throw err;
         });
     }
 

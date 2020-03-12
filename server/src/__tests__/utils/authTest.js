@@ -1,31 +1,32 @@
 import Auth from '../../utils/auth';
+
 describe("Authentication", function() {
     describe("verify token", function() {
         let token, auth;
 
         beforeEach(() => {
-            this.auth =  new Auth();
+            auth = new Auth();
         });
 
         test('is false', () => {
-            expect(this.auth.verify('test')).toBeFalsy();
+            expect(auth.verify('test')).toBeFalsy();
         });
 
         beforeEach(() => {
-            token = this.auth.sign({ user: 'julian', password: 'ndjnejnejnje' });
+            token = auth.sign({user: 'julian', password: 'ndjnejnejnje'});
         });
 
         test('is true', () => {
-            expect(this.auth.verify(token)).toBeTruthy();
+            expect(auth.verify(token)).toBeTruthy();
         });
-    })
+    });
 
     describe("get token", function() {
         let auth;
 
 
         beforeEach(() => {
-             this.auth =  new Auth();
+            auth = new Auth();
         });
 
         test('is 3df5dc', () => {
@@ -36,8 +37,22 @@ describe("Authentication", function() {
                 return req;
             };
             let req = mockRequest();
-            expect(this.auth.getToken(req)).toBe("3df5dc");
+            expect(auth.getToken(req)).toBe("3df5dc");
+        });
+    });
+
+    describe("decode token", function () {
+        let auth;
+
+
+        beforeEach(() => {
+            auth = new Auth();
+        });
+
+        test('is true', () => {
+            let token = auth.sign({user: 'julian', password: 'ndjnejnejnje'});
+            expect(auth.decode(token)).toMatchObject({user: 'julian', password: 'ndjnejnejnje'});
         });
     })
 
-})
+});

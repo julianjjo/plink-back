@@ -61,4 +61,11 @@ describe("Response Utils", function() {
         response.responseNotImplemented();
         expect(res.json).toHaveBeenCalled();
     });
+
+    test('have Called responseToken', () => {
+        let res = createResMock();
+        let response = new Response(res);
+        response.responseToken("eyJhbGciOiJIUzI1NiIsIn");
+        expect(res.json).toHaveBeenCalled();
+    });
 });

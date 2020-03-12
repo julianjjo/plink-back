@@ -15,14 +15,19 @@ class Auth {
   }
 
   sign (data){
-    let token = jwt.sign(data, secretKey.tokenKey);
+    return jwt.sign(data, secretKey.tokenKey);
+  }
+
+  getToken(request) {
+    let token = request.headers.authorization;
+    if (token !== undefined) {
+      token = token.substr(6);
+    }
     return token;
   }
 
-  getToken(request){
-    let token = request.headers.authorization;
-    token = token.substr(6);
-    return token;
+  decode(token) {
+    return jwt.decode(token);
   }
 }
 

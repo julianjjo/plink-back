@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 const env = process.env.NODE_ENV  || 'development';
-if (env == 'development') {
+if (env === 'development') {
   db.sequelize.sync({ force: true }).then(() => {
     console.log("Drop and re-sync db.");
   });
@@ -24,7 +24,7 @@ if (env == 'development') {
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/crytocurrencies', crytocurrenciesRouter);
+app.use('/cryptocurrencies', crytocurrenciesRouter);
 app.use('/auth', authRouter);
 
 export default app;

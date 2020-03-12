@@ -1,5 +1,5 @@
 import db from '../../models/index';
-import CrytocurrencyService from '../../services/crytocurrencyService';
+import CrytocurrencyService from '../../services/cryptocurrencyService';
 
 jest.mock('../../models/index');
 

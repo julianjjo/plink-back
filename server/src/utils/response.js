@@ -6,9 +6,10 @@ class Response {
 
     responseErrorSequelizeSave(error) {
         this.response.statusCode = 400;
+
         this.response.json({
-            "type": error.parent.code,
-            "title": error.parent.sqlMessage,
+            "type": error.code,
+            "message": error.message,
             "status": 400
         });
     }
@@ -40,11 +41,18 @@ class Response {
         this.response.json(json);
     }
 
-    responseNotImplemented(){
+    responseNotImplemented() {
         this.response.statusCode = 501;
         this.response.json({
             "type": 'Not Implemented',
             "status": 501
+        });
+    }
+
+    responseToken(token) {
+        this.response.json({
+            message: 'Authenticated',
+            token: token
         });
     }
 }
