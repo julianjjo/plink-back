@@ -54,7 +54,7 @@ describe("Cryptocurrency Service", function() {
         return Cryptocurrency.get().then(data => expect(data).toEqual(this.data));
     });
 
-    test('should fetch User not found in get', () => {
+    test('should fetch Cryptocurrency not found in get', () => {
         this.data = undefined;
         db.sequelize.models.Cryptocurrency.findOne.mockResolvedValue(this.data);
         let Cryptocurrency = new CrytocurrencyService(db);

@@ -11,8 +11,7 @@ let userService = new UserService(db);
 /* POST login validate. */
 router.post('/login', function (req, res, next) {
     let response = new Response(res);
-    let {user, password} = req.body;
-    console.log(user, password);
+    let {user} = req.body;
     userService.getByUsername(user).then(function (result) {
         if (result !== false) {
             let token = auth.sign(result);

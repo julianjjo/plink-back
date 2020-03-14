@@ -15,7 +15,7 @@ class Auth {
   }
 
   sign (data){
-    return jwt.sign(data, secretKey.tokenKey);
+    return jwt.sign(data, secretKey.tokenKey,{ expiresIn: '1h' });
   }
 
   getToken(request) {

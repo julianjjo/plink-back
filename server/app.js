@@ -5,6 +5,7 @@ import indexRouter from './src/routes/index';
 import usersRouter from './src/routes/users';
 import crytocurrenciesRouter from './src/routes/crytocurrencies';
 import authRouter from './src/routes/auth';
+import braveNewCoin from './src/routes/braveNewCoin';
 
 var app = express();
 
@@ -26,5 +27,6 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/cryptocurrencies', crytocurrenciesRouter);
 app.use('/auth', authRouter);
+app.use('/coins', braveNewCoin);
 
 export default app;
