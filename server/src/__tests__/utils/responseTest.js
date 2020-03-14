@@ -37,7 +37,7 @@ describe("Response Utils", function() {
         let res = createResMock();
         let response = new Response(res);
         response.responseErrorTokenInvalid();
-        expect(res.send).toHaveBeenCalled();
+        expect(res.json).toHaveBeenCalled();
     });
 
     test('have Called responseOkMessage', () => {
@@ -66,6 +66,13 @@ describe("Response Utils", function() {
         let res = createResMock();
         let response = new Response(res);
         response.responseToken("eyJhbGciOiJIUzI1NiIsIn");
+        expect(res.json).toHaveBeenCalled();
+    });
+
+    test('have Called responsePasswordInvalid', () => {
+        let res = createResMock();
+        let response = new Response(res);
+        response.responsePasswordInvalid();
         expect(res.json).toHaveBeenCalled();
     });
 });

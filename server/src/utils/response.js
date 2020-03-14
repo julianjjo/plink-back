@@ -25,7 +25,10 @@ class Response {
 
     responseErrorTokenInvalid() {
         this.response.statusCode = 401;
-        this.response.send('Unauthorized token invalid');
+        this.response.json({
+            "message": "Unauthorized token invalid",
+            "status": 401
+        });
     }
 
     responseOkMessage(message = 'Created'){
@@ -50,9 +53,18 @@ class Response {
     }
 
     responseToken(token) {
+        this.response.statusCode = 200;
         this.response.json({
             message: 'Authenticated',
             token: token
+        });
+    }
+
+    responsePasswordInvalid() {
+        this.response.statusCode = 401;
+        this.response.json({
+            "message": "Password invalid",
+            "status": 401
         });
     }
 }
